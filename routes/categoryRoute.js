@@ -2,6 +2,7 @@ import Express from "express";
 import {
   createCategory,
   updateCategory,
+  deleteCategory,
   allCategory,
   singleCategory,
 } from "../controller/categoryController.js";
@@ -16,7 +17,7 @@ router.post("/createCategory", requireSignIn, isAdmin, createCategory);
 router.put("/updateCategory/:id", requireSignIn, isAdmin, updateCategory);
 
 //delete category
-router.delete("/deleteCategory/:id", requireSignIn, isAdmin, updateCategory);
+router.delete("/deleteCategory/:id", requireSignIn, isAdmin, deleteCategory);
 
 //  all category
 router.get("/allCategory", allCategory);

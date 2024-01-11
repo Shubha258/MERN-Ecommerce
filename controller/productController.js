@@ -4,6 +4,7 @@ import slugify from "slugify";
 
 export const createProductController = async (req, res) => {
   try {
+    console.log("inside create product");
     const { name, description, price, category, quantity, shipping } =
       req.fields;
     const { photo } = req.files;
@@ -51,7 +52,7 @@ export const getProductController = async (req, res) => {
   try {
     const products = await productModel
       .find({})
-      .populate("category")
+
       .select("-photo")
       .limit(12)
       .sort({ createdAt: -1 });
