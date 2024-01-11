@@ -4,11 +4,10 @@ import slugify from "slugify";
 //create catefory
 
 export const createCategory = async (req, res) => {
-  console.log("hello");
-  //   return res.staus(200).send({ message: "from create side" });
   try {
+    // return res.staus(200).send({ message: "from create side" });
     const { name } = req.body;
-
+    console.log(name);
     if (!name) {
       return res.status(401).send({ message: "name is required" });
     }
@@ -50,6 +49,12 @@ export const updateCategory = async (req, res) => {
     const { name } = req.body;
     const { id } = req.params;
 
+    if (!name) {
+      return res.status(400).send({
+        success: false,
+        message: "Name is required for updating category",
+      });
+    }
     const category = await categoryModel.findByIdAndUpdate(
       id,
       { name, slug: slugify(name) },
@@ -75,9 +80,16 @@ export const updateCategory = async (req, res) => {
 export const deleteCategory = async (req, res) => {
   console.log("hhh");
   try {
-    // const {name}=req.body;
+    // const { name } = req.body;
     const { id } = req.params;
-
+    if (!id) {
+      return res.status(400).send({
+        success: false,
+        message: "id is required for delete category",
+      });
+    }
+ 
+    console.log(id);
     const category = await categoryModel.findByIdAndDelete(id);
 
     res.status(200).send({
@@ -88,7 +100,7 @@ export const deleteCategory = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(401).send({
-      message: "failed to update",
+      message: "failed to delete category",
       success: "false",
     });
   }
