@@ -4,10 +4,13 @@ import {
   deleteProductController,
   getProductController,
   getSingleProductController,
+  productCategoryController,
   productCountController,
   productFiltersController,
   productListController,
   productPhotoController,
+  realtedProductController,
+  searchProductController,
   updateProductController,
 } from "../controller/productController.js";
 import { isAdmin, requireSignIn } from "../middleware/authMiddleware.js";
@@ -40,7 +43,7 @@ router.get("/getProduct", getProductController);
 router.get("/getProduct/:slug", getSingleProductController);
 
 //get photo
-router.get("/product-photo/:pid", productPhotoController);
+router.get("/productPhoto/:pid", productPhotoController);
 
 //delete rproduct
 router.delete("/deleteProduct/:pid", deleteProductController);
@@ -56,4 +59,14 @@ router.get("/productCount", productCountController);
 
 //product per page
 router.get("/productList/:page", productListController);
+
+
+//search product
+router.get("/search/:keyword", searchProductController);
+
+//similar product
+router.get("/relatedProduct/:pid/:cid", realtedProductController);
+
+//category wise product
+router.get("/productCategory/:slug", productCategoryController);
 export default router;
